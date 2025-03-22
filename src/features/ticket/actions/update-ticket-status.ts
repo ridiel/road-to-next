@@ -1,21 +1,28 @@
-"use server";
+'use server';
 
-import { TicketStatus } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { TicketStatus } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 
-import {
-  fromErrorToActionState,
-  toActionState,
-} from "@/components/form/utils/to-action-state";
-import { prisma } from "@/lib/prisma";
-import { ticketsPath } from "@/paths";
+import { fromErrorToActionState, toActionState } from '@/components/form/utils/to-action-state';
+import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
+import { isOwner } from '@/features/auth/utils/is-owner';
+import { prisma } from '@/lib/prisma';
+import { ticketsPath } from '@/paths';
 
 export const updateTicketStatus = async (id: string, status: TicketStatus) => {
-  await new Promise(resolve => {
-    setTimeout(resolve, 750);
-  });
+  const { user } = await getAuthOrRedirect();
 
   try {
+    const ticket = await prisma.ticket.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (!ticket || !isOwner(user, ticket)) {
+      return toActionState('ERROR', 'You are not allowed to edit this ticket');
+    }
+
     await prisma.ticket.update({
       where: { id },
       data: { status },
@@ -26,5 +33,5 @@ export const updateTicketStatus = async (id: string, status: TicketStatus) => {
 
   revalidatePath(ticketsPath());
 
-  return toActionState("SUCCESS", "Status updated");
+  return toActionState('SUCCESS', 'Status updated');
 };

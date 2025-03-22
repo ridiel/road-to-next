@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import { ActionState } from "../utils/to-action-state";
+import { ActionState } from '../utils/to-action-state';
 
 type OnArgs = {
   actionState: ActionState;
@@ -11,21 +11,18 @@ type UseActionFeedbackOptions = {
   onError?: (onArgs: OnArgs) => void;
 };
 
-export const useActionFeedback = (
-  actionState: ActionState,
-  options: UseActionFeedbackOptions
-) => {
+export const useActionFeedback = (actionState: ActionState, options: UseActionFeedbackOptions) => {
   const prevTimestamp = useRef(actionState.timestamp);
   const isUpdate = prevTimestamp.current !== actionState.timestamp;
 
   useEffect(() => {
     if (!isUpdate) return;
 
-    if (actionState.status === "SUCCESS") {
+    if (actionState.status === 'SUCCESS') {
       options.onSuccess?.({ actionState });
     }
 
-    if (actionState.status === "ERROR") {
+    if (actionState.status === 'ERROR') {
       options.onError?.({ actionState });
     }
 

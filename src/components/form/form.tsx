@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
-import { toast } from "sonner";
+import { ReactNode } from 'react';
+import { toast } from 'sonner';
 
-import { useActionFeedback } from "./hooks/use-action-feedback";
-import { ActionState } from "./utils/to-action-state";
+import { useActionFeedback } from './hooks/use-action-feedback';
+import { ActionState } from './utils/to-action-state';
 
 type FormProps = {
   action: (payload: FormData) => void;
@@ -12,13 +12,7 @@ type FormProps = {
   onError?: (actionState: ActionState) => void;
 };
 
-export const Form = ({
-  action,
-  actionState,
-  children,
-  onSuccess,
-  onError,
-}: FormProps) => {
+export const Form = ({ action, actionState, children, onSuccess, onError }: FormProps) => {
   useActionFeedback(actionState, {
     onSuccess: ({ actionState }) => {
       if (actionState.message) {

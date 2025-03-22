@@ -1,8 +1,8 @@
-import { cloneElement, useActionState, useState } from "react";
+import { cloneElement, useActionState, useState } from 'react';
 
-import { Form } from "./form/form";
-import { SubmitButton } from "./form/submit-button";
-import { ActionState, EMPTY_ACTION_STATE } from "./form/utils/to-action-state";
+import { Form } from './form/form';
+import { SubmitButton } from './form/submit-button';
+import { ActionState, EMPTY_ACTION_STATE } from './form/utils/to-action-state';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,7 +12,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "./ui/alert-dialog";
+} from './ui/alert-dialog';
 
 type UseConfirmDialogProps = {
   title?: string;
@@ -22,8 +22,8 @@ type UseConfirmDialogProps = {
 };
 
 const UseConfirmDialog = ({
-  title = "Are you absolutely sure?",
-  description = "This action cannot be undone. Make sure you understand the consequences.",
+  title = 'Are you absolutely sure?',
+  description = 'This action cannot be undone. Make sure you understand the consequences.',
   action,
   trigger,
 }: UseConfirmDialogProps) => {
@@ -49,11 +49,7 @@ const UseConfirmDialog = ({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Form
-              action={formAction}
-              actionState={actionState}
-              onSuccess={handleSuccess}
-            >
+            <Form action={formAction} actionState={actionState} onSuccess={handleSuccess}>
               <SubmitButton label="Confirm" />
             </Form>
           </AlertDialogAction>

@@ -1,4 +1,4 @@
-import { RedirectToast } from "@/components/redirect-toast";
+import { RedirectToast } from '@/components/redirect-toast';
 
 type TemplateProps = {
   children: React.ReactNode;
