@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { ParsedSearchParams } from '../search-params';
 
 export const getTickets = async (userId: string | undefined, searchParams: ParsedSearchParams) => {
-  const { search, sort } = await searchParams;
+  const { search, sortKey, sortValue } = await searchParams;
 
   return await prisma.ticket.findMany({
     where: {
@@ -14,8 +14,7 @@ export const getTickets = async (userId: string | undefined, searchParams: Parse
       },
     },
     orderBy: {
-      ...(sort === 'newest' && { createdAt: 'desc' }),
-      ...(sort === 'bounty' && { bounty: 'desc' }),
+      [sortKey]: sortValue,
     },
     include: {
       user: {
