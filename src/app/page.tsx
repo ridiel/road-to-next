@@ -7,7 +7,7 @@ import { TicketList } from '@/features/ticket/components/ticket-list';
 import { searchParamsCache } from '@/features/ticket/search-params';
 
 type HomePageProps = {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 };
 
 const HomePage = async ({ searchParams }: HomePageProps) => {
