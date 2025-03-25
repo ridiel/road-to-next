@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { accountPasswordPath, accountProfilePath } from '@/paths';
+
 export const AccountTabs = () => {
   const pathname = usePathname();
   return (

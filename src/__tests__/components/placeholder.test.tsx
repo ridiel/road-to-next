@@ -2,8 +2,6 @@ import { render, screen } from '@testing-library/react';
 
 import { Placeholder } from '@/components/placeholder';
 
-import '@testing-library/jest-dom';
-
 describe('Placeholder', () => {
   // Test default rendering
   it('renders with default props', () => {

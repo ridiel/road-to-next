@@ -13,6 +13,7 @@ function Separator({
 }: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
   return (
     <SeparatorPrimitive.Root
+      role="separator"
       data-slot="separator-root"
       decorative={decorative}
       orientation={orientation}

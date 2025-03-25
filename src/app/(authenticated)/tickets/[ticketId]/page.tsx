@@ -21,9 +21,12 @@ const TicketPage = async ({ params }: TicketPageProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-8">
+    <div className="flex flex-1 flex-col gap-y-8">
       <Breadcrumbs
-        breadcrumbs={[{ title: 'Tickets', href: homePath() }, { title: ticket.title }]}
+        breadcrumbs={[
+          { title: 'Tickets', href: homePath() },
+          { title: ticket.title },
+        ]}
       />
 
       <Separator />
