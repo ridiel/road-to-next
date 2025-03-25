@@ -11,7 +11,10 @@ type UseActionFeedbackOptions = {
   onError?: (onArgs: OnArgs) => void;
 };
 
-export const useActionFeedback = (actionState: ActionState, options: UseActionFeedbackOptions) => {
+export const useActionFeedback = (
+  actionState: ActionState,
+  options: UseActionFeedbackOptions,
+) => {
   const prevTimestamp = useRef(actionState.timestamp);
   const isUpdate = prevTimestamp.current !== actionState.timestamp;
 

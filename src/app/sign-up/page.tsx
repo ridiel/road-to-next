@@ -14,7 +14,10 @@ const SignUpPage = () => {
           className="animate-fade-in-from-top w-full max-w-[420px]"
           content={<SignUpForm />}
           footer={
-            <Link className="text-muted-foreground hover:text-primary text-sm" href={signInPath()}>
+            <Link
+              className="text-muted-foreground hover:text-primary text-sm"
+              href={signInPath()}
+            >
               Have an account? Sign In
             </Link>
           }

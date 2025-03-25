@@ -3,7 +3,10 @@
 import { useActionState, useRef } from 'react';
 import { Ticket } from '@prisma/client';
 
-import { DatePicker, ImperativeHandleFromDatePicker } from '@/components/date-picker';
+import {
+  DatePicker,
+  ImperativeHandleFromDatePicker,
+} from '@/components/date-picker';
 import { FieldError } from '@/components/form/field-error';
 import { Form } from '@/components/form/form';
 import { SubmitButton } from '@/components/form/submit-button';
@@ -25,7 +28,9 @@ export const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
     EMPTY_ACTION_STATE,
   );
 
-  const datePickerImperativeHandleRef = useRef<ImperativeHandleFromDatePicker>(null!);
+  const datePickerImperativeHandleRef = useRef<ImperativeHandleFromDatePicker>(
+    null!,
+  );
 
   const handleSuccess = () => {
     datePickerImperativeHandleRef.current?.reset();
@@ -46,7 +51,9 @@ export const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
       <Textarea
         id="content"
         name="content"
-        defaultValue={(actionState.payload?.get('content') as string) ?? ticket?.content}
+        defaultValue={
+          (actionState.payload?.get('content') as string) ?? ticket?.content
+        }
       />
       <FieldError actionState={actionState} name="content" />
 
@@ -56,7 +63,9 @@ export const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
           <DatePicker
             id="deadline"
             name="deadline"
-            defaultValue={(actionState.payload?.get('deadline') as string) ?? ticket?.deadline}
+            defaultValue={
+              (actionState.payload?.get('deadline') as string) ?? ticket?.deadline
+            }
             imperativeHandleRef={datePickerImperativeHandleRef}
           />
           <FieldError actionState={actionState} name="deadline" />

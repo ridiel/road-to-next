@@ -1,9 +1,19 @@
 import { Prisma } from '@prisma/client';
-import { LucideMoreVertical, LucidePencil, LucideSquareArrowOutUpRight } from 'lucide-react';
+import {
+  LucideMoreVertical,
+  LucidePencil,
+  LucideSquareArrowOutUpRight,
+} from 'lucide-react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { isOwner } from '@/features/auth/utils/is-owner';
 import { cn } from '@/lib/utils';
@@ -88,7 +98,9 @@ export const TicketItem = async ({ ticket, isDetail = false }: TicketItemProps) 
           <p className="text-muted-foreground text-sm">
             {ticket.deadline} by {ticket.user.username}
           </p>
-          <p className="text-muted-foreground text-sm">{toCurrencyFromCent(ticket.bounty)}</p>
+          <p className="text-muted-foreground text-sm">
+            {toCurrencyFromCent(ticket.bounty)}
+          </p>
         </CardFooter>
       </Card>
 

@@ -49,7 +49,11 @@ const UseConfirmDialog = ({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Form action={formAction} actionState={actionState} onSuccess={handleSuccess}>
+            <Form
+              action={formAction}
+              actionState={actionState}
+              onSuccess={handleSuccess}
+            >
               <SubmitButton label="Confirm" />
             </Form>
           </AlertDialogAction>

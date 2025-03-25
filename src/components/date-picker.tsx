@@ -19,7 +19,12 @@ type DatePickerProps = {
   imperativeHandleRef?: React.RefObject<ImperativeHandleFromDatePicker>;
 };
 
-const DatePicker = ({ id, name, defaultValue, imperativeHandleRef }: DatePickerProps) => {
+const DatePicker = ({
+  id,
+  name,
+  defaultValue,
+  imperativeHandleRef,
+}: DatePickerProps) => {
   const [date, setDate] = useState<Date | undefined>(
     defaultValue ? new Date(defaultValue) : new Date(),
   );
@@ -46,7 +51,12 @@ const DatePicker = ({ id, name, defaultValue, imperativeHandleRef }: DatePickerP
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={handleSelect} initialFocus />
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={handleSelect}
+          initialFocus
+        />
       </PopoverContent>
     </Popover>
   );

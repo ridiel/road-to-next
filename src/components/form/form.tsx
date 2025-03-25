@@ -12,7 +12,13 @@ type FormProps = {
   onError?: (actionState: ActionState) => void;
 };
 
-export const Form = ({ action, actionState, children, onSuccess, onError }: FormProps) => {
+export const Form = ({
+  action,
+  actionState,
+  children,
+  onSuccess,
+  onError,
+}: FormProps) => {
   useActionFeedback(actionState, {
     onSuccess: ({ actionState }) => {
       if (actionState.message) {
