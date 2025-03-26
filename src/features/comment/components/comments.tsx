@@ -1,9 +1,13 @@
+'use client';
+
 import { CardCompact } from '@/components/card-compact';
+import { Button } from '@/components/ui/button';
 
 import { CommentCreateForm } from './comment-create-form';
 import { CommentDeleteButton } from './comment-delete-button';
 import { CommentItem } from './comment-item';
 
+import { getComments } from '../queries/get-comments';
 import { CommentWithMetadata } from '../types';
 
 interface CommentsProps {
@@ -12,6 +16,11 @@ interface CommentsProps {
 }
 
 export const Comments = ({ ticketId, comments = [] }: CommentsProps) => {
+  const handleMore = async () => {
+    const result = await getComments(ticketId);
+    console.log(result);
+  };
+
   return (
     <>
       <CardCompact
@@ -32,6 +41,12 @@ export const Comments = ({ ticketId, comments = [] }: CommentsProps) => {
             ]}
           />
         ))}
+      </div>
+
+      <div className="ml-8 flex flex-col justify-center">
+        <Button variant="ghost" onClick={handleMore}>
+          More
+        </Button>
       </div>
     </>
   );
