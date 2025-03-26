@@ -4,7 +4,7 @@ import { Ticket, TicketStatus } from '@prisma/client';
 import { LucideTrash } from 'lucide-react';
 import { toast } from 'sonner';
 
-import UseConfirmDialog from '@/components/confirm-dialog';
+import useConfirmDialog from '@/components/confirm-dialog';
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -24,7 +24,7 @@ type TicketMoreMenuProps = {
 };
 
 const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
-  const [deleteButton, deleteDialog] = UseConfirmDialog({
+  const [deleteButton, deleteDialog] = useConfirmDialog({
     action: deleteTicket.bind(null, ticket.id),
     trigger: (
       <DropdownMenuItem>

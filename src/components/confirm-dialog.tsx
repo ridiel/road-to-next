@@ -21,7 +21,7 @@ type UseConfirmDialogProps = {
   trigger: React.ReactElement<{ onClick?: () => void }>;
 };
 
-const UseConfirmDialog = ({
+const useConfirmDialog = ({
   title = 'Are you absolutely sure?',
   description = 'This action cannot be undone. Make sure you understand the consequences.',
   action,
@@ -65,4 +65,4 @@ const UseConfirmDialog = ({
   return [dialogTrigger, dialog];
 };
 
-export default UseConfirmDialog;
+export default useConfirmDialog;

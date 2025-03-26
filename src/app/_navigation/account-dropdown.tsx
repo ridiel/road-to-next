@@ -25,9 +25,12 @@ const AccountDropdown = ({ user }: AccountDropdownProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <Avatar>
-          <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
-        </Avatar>
+        <div className="flex items-center gap-2">
+          <Avatar>
+            <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <span>{user.username}</span>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

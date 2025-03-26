@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/card';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { isOwner } from '@/features/auth/utils/is-owner';
+import { Comments } from '@/features/comment/components/comments';
+import { CommentWithMetadata } from '@/features/comment/types';
 import { cn } from '@/lib/utils';
 import { ticketEditPath, ticketPath } from '@/paths';
 import { toCurrencyFromCent } from '@/utils/currency';
@@ -35,9 +37,14 @@ type TicketItemProps = {
     };
   }>;
   isDetail?: boolean;
+  comments?: CommentWithMetadata[];
 };
 
-export const TicketItem = async ({ ticket, isDetail = false }: TicketItemProps) => {
+export const TicketItem = async ({
+  ticket,
+  isDetail = false,
+  comments,
+}: TicketItemProps) => {
   const { user } = await getAuth();
 
   const isTicketOwner = isOwner(user, ticket);
@@ -71,52 +78,56 @@ export const TicketItem = async ({ ticket, isDetail = false }: TicketItemProps) 
 
   return (
     <div
-      className={cn('flex w-full gap-x-1', {
+      className={cn('flex w-full flex-col gap-y-4', {
         'max-w-[580px]': isDetail,
         'max-w-[420px]': !isDetail,
       })}
     >
-      <Card key={ticket.id} className="w-full gap-y-2">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-x-2 text-2xl">
-            <span>{TICKET_ICONS[ticket.status]}</span>
-            <span className="truncate">{ticket.title}</span>
-          </CardTitle>
-        </CardHeader>
+      <div className="flex gap-x-2">
+        <Card key={ticket.id} className="w-full gap-y-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-x-2 text-2xl">
+              <span>{TICKET_ICONS[ticket.status]}</span>
+              <span className="truncate">{ticket.title}</span>
+            </CardTitle>
+          </CardHeader>
 
-        <CardContent>
-          <span
-            className={cn('whitespace-break-spaces', {
-              'line-clamp-2': !isDetail,
-            })}
-          >
-            {ticket.content}
-          </span>
-        </CardContent>
+          <CardContent>
+            <span
+              className={cn('whitespace-break-spaces', {
+                'line-clamp-2': !isDetail,
+              })}
+            >
+              {ticket.content}
+            </span>
+          </CardContent>
 
-        <CardFooter className="flex justify-between">
-          <p className="text-muted-foreground text-sm">
-            {ticket.deadline} by {ticket.user.username}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            {toCurrencyFromCent(ticket.bounty)}
-          </p>
-        </CardFooter>
-      </Card>
+          <CardFooter className="flex justify-between">
+            <p className="text-muted-foreground text-sm">
+              {ticket.deadline} by {ticket.user.username}
+            </p>
+            <p className="text-muted-foreground text-sm">
+              {toCurrencyFromCent(ticket.bounty)}
+            </p>
+          </CardFooter>
+        </Card>
 
-      <div className="flex flex-col gap-y-1">
-        {isDetail ? (
-          <>
-            {editButton}
-            {moreMenu}
-          </>
-        ) : (
-          <>
-            {detailButton}
-            {editButton}
-          </>
-        )}
+        <div className="flex flex-col gap-y-1">
+          {isDetail ? (
+            <>
+              {editButton}
+              {moreMenu}
+            </>
+          ) : (
+            <>
+              {detailButton}
+              {editButton}
+            </>
+          )}
+        </div>
       </div>
+
+      {isDetail && <Comments ticketId={ticket.id} comments={comments} />}
     </div>
   );
 };
