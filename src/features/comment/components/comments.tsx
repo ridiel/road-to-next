@@ -21,23 +21,22 @@ interface CommentsProps {
 export const Comments = ({ ticketId, paginatedComments }: CommentsProps) => {
   const queryKey = ['comments', ticketId];
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: queryKey,
-      queryFn: ({ pageParam }) => getComments(ticketId, pageParam),
-      initialPageParam: undefined as string | undefined,
-      getNextPageParam: lastPage =>
-        lastPage.metadata.hasNextPage ? lastPage.metadata.cursor : undefined,
-      initialData: {
-        pages: [
-          {
-            list: paginatedComments.list,
-            metadata: paginatedComments.metadata,
-          },
-        ],
-        pageParams: [undefined],
-      },
-    });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: queryKey,
+    queryFn: ({ pageParam }) => getComments(ticketId, pageParam),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: lastPage =>
+      lastPage.metadata.hasNextPage ? lastPage.metadata.cursor : undefined,
+    initialData: {
+      pages: [
+        {
+          list: paginatedComments.list,
+          metadata: paginatedComments.metadata,
+        },
+      ],
+      pageParams: [undefined],
+    },
+  });
 
   const comments = data.pages.flatMap(page => page.list);
 
